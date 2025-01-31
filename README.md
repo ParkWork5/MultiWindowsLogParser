@@ -1,7 +1,6 @@
 Systemon output and Windows log parser. It sorts the log file out by event ID and makes the events readable. All you have to do is edit the source and destination paths in main and you are good to go.
 
 If you are trying to parse your Sysmon output read below. Windows logs should work auomatically.
-Converts CAPEV2 Sysmon output into human readable format.
 
 Read how to setup Sysmon with CAPE here https://parkwork5.github.io/2024/08/02/Sysmon&CAPEv2.html.
 
