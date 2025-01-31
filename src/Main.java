@@ -7,13 +7,13 @@ public class Main {
     public static void main(String[] args) {
 
 
-        String sysmonFilePath=""; // Path to Sysmon xml file produced by CAPE
-        String sysmonBasePath=""; // Where you want the parsed Sysmon files to go to
-        HashMap<Integer, ArrayList<SysmonRecord>> parsedSysmon;
+        String inputFile=""; // Windows log file goes here
+        String folderOutputs=""; // Where you want the parsed and seperated files to go
+        HashMap<Integer, ArrayList<WindowsRecord>> parsedSysmon;
         FileOperations fileOps = new FileOperations();
         Object[] eventTypes;
         String formattedText,textSysmonID;
-        parsedSysmon = fileOps.parseXML(sysmonFilePath);
+        parsedSysmon = fileOps.parseXML(inputFile);
 
         eventTypes = parsedSysmon.keySet().toArray();
 
@@ -21,7 +21,7 @@ public class Main {
         {
             textSysmonID = fileOps.SysmonEventMapper( Integer.valueOf(eventTypes[i].toString()));
             formattedText = fileOps.FormatFile(parsedSysmon.get(eventTypes[i]));
-            fileOps.WriteFile(formattedText,sysmonBasePath,eventTypes[i].toString(),textSysmonID);
+            fileOps.WriteFile(formattedText,folderOutputs,eventTypes[i].toString(),textSysmonID);
         }
 
     }

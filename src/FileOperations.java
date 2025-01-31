@@ -17,16 +17,16 @@ import java.util.Map;
 public class FileOperations {
 
     private String recordFormat="";
-    private SysmonRecord currentRecord;
+    private WindowsRecord currentRecord;
 
 
     public FileOperations() {
     }
 
-    public HashMap<Integer, ArrayList<SysmonRecord>> parseXML(String filePath)
+    public HashMap<Integer, ArrayList<WindowsRecord>> parseXML(String filePath)
     {
         File file = new File(filePath);
-        NewSysmonHandler handler = new NewSysmonHandler();
+        RecordHandler handler = new RecordHandler();
         SAXParserFactory factory = SAXParserFactory.newInstance();
         factory.setValidating(true);
         SAXParser saxParser = null;
@@ -50,7 +50,7 @@ public class FileOperations {
 
     }
 
-    public String FormatFile(ArrayList<SysmonRecord> recordsToWrite)
+    public String FormatFile(ArrayList<WindowsRecord> recordsToWrite)
     {
         recordFormat="";
 
@@ -168,9 +168,13 @@ public class FileOperations {
                 return "29-FileExecutableDetected";
             case 225:
                 return "225-Sysmon Error";
+            case 4103:
+                return "4103-PowerShell Module";
+            case 4104:
+                return "4104-PowerShell Script Block";
 
 
         }
-     return "ID not matched";
+     return eventID.toString();
     }
 }

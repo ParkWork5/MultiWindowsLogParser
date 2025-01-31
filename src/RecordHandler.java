@@ -5,29 +5,29 @@ import org.xml.sax.SAXException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class NewSysmonHandler extends DefaultHandler {
+public class RecordHandler extends DefaultHandler {
 
-    private HashMap<Integer, ArrayList<SysmonRecord>> sysmonRecords;
+    private HashMap<Integer, ArrayList<WindowsRecord>> sysmonRecords;
     private HashMap <String,String> dataRecords;
     private StringBuilder data = null;
     private Boolean bEventID=false;
     private Boolean bComputer=false;
     private Boolean bData=false;
     private Boolean bTimestamp=false;
-    private SysmonRecord record;
+    private WindowsRecord record;
     private Boolean resetTrigger=false;
     private String dataKey;
     private String dataValue;
     private Integer depthTracker=0;
-    private ArrayList<SysmonRecord> runningList;
+    private ArrayList<WindowsRecord> runningList;
     private String timeStamp;
     private Boolean bUser=false;
     private String user;
 
-    public NewSysmonHandler() {
-        sysmonRecords = new HashMap<Integer, ArrayList<SysmonRecord>>();
+    public RecordHandler() {
+        sysmonRecords = new HashMap<Integer, ArrayList<WindowsRecord>>();
     }
-    public HashMap<Integer, ArrayList<SysmonRecord>> GetParsedEvents()
+    public HashMap<Integer, ArrayList<WindowsRecord>> GetParsedEvents()
     {
         return sysmonRecords;
     }
@@ -39,7 +39,7 @@ public class NewSysmonHandler extends DefaultHandler {
 
         if(qName.equals("Event")) // Checks if new sysmon event is starting to be parsed
         {
-            record = new SysmonRecord();
+            record = new WindowsRecord();
             dataRecords = new HashMap<String,String>();
             resetTrigger=true;
 
@@ -97,7 +97,7 @@ public class NewSysmonHandler extends DefaultHandler {
             else
             {
                 record.setData(dataRecords);
-                runningList = new ArrayList<SysmonRecord>(); //  Creates a new arraylist if one does not exist for the sysmon event
+                runningList = new ArrayList<WindowsRecord>(); //  Creates a new arraylist if one does not exist for the sysmon event
                 runningList.add(record);
                 sysmonRecords.put(record.getSysmonEventID(),runningList);
             }

@@ -1,6 +1,6 @@
 import java.util.HashMap;
 
-public class SysmonRecord {
+public class WindowsRecord {
 
     private Integer sysmonEventID;
     private String timestamp;
